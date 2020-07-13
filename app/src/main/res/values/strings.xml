@@ -5,4 +5,14 @@
     <string name="home">Home</string>
     <string name="search">Search</string>
     <string name="profile">Profile</string>
+    <string name="title">volunteera</string>
+
+    <string-array name="data_photo">
+        <item>https://www.indorelawan.org/uploads/gallery/2020-6-13/5f0bd6311fb97e514b249053_thumbnail370x250.jpg</item>
+        <item>https://www.indorelawan.org/uploads/gallery/2020-6-8/5f05213ee535439621d8765e_thumbnail370x250.jpg</item>
+        <item>https://www.indorelawan.org/uploads/gallery/2020-5-8/5eddaa8857927acf605df12d_thumbnail370x250.jpg</item>
+        <item>https://www.indorelawan.org/uploads/gallery/2020-3-8/5e8d5b25c59bccf3b14e3ca9_thumbnail370x250.png</item>
+        <item>https://www.indorelawan.org/uploads/gallery/2019-8-10/5d77569782e94fa0e15b68b8_thumbnail370x250.jpg</item>
+    </string-array>
 </resources>
+

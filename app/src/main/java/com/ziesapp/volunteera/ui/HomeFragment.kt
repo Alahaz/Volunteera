@@ -5,7 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ziesapp.volunteera.Activity
+import com.ziesapp.volunteera.ListActivityAdapter
+import com.ziesapp.volunteera.MainActivity
 import com.ziesapp.volunteera.R
+import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +24,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class HomeFragment : Fragment() {
+
+    private val list = ArrayList<Activity>()
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +44,26 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_home, container, false)
+        val rvHome = rootView.findViewById<RecyclerView>(R.id.rv_home)
+        list.addAll(getListActivity())
+        rvHome.layoutManager = LinearLayoutManager(activity)
+        val listActivityAdapter = ListActivityAdapter(list)
+        rvHome.adapter = listActivityAdapter
+
+        return rootView
+    }
+
+    fun getListActivity(): ArrayList<Activity> {
+        val dataFoto = resources.getStringArray(R.array.data_photo)
+
+        val listActivity = ArrayList<Activity>()
+
+        for (position in dataFoto.indices) {
+            val activity = Activity(dataFoto[position])
+            listActivity.add(activity)
+        }
+        return listActivity
     }
 
     companion object {
@@ -56,5 +84,5 @@ class HomeFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
+
 }
