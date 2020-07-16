@@ -10,5 +10,5 @@ data class Activity(
 //    val lokasi: String,
     val gambar: String
 //    val kontak: String
-):Parcelable {
+) : Parcelable {
 }

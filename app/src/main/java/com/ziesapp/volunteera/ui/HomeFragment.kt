@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziesapp.volunteera.Activity
 import com.ziesapp.volunteera.ListActivityAdapter
-import com.ziesapp.volunteera.MainActivity
 import com.ziesapp.volunteera.R
-import kotlinx.android.synthetic.main.fragment_home.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

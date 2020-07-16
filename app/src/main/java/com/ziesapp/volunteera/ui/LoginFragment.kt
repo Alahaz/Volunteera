@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ProgressBar
+import com.google.firebase.auth.FirebaseAuth
 import com.ziesapp.volunteera.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,6 +25,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var btnLogin: Button
+    private lateinit var btnRegister: Button
+    private lateinit var etUsername: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var mAuth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
 
     private lateinit var callBackFragment: CallBackFragment
 
@@ -63,7 +73,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnRegister: Button = view.findViewById(R.id.btn_register)
+
+        etUsername = view.findViewById(R.id.et_username)
+        etPassword = view.findViewById(R.id.et_password)
+        mAuth = FirebaseAuth.getInstance()
+        progressBar = view.findViewById(R.id.pb_login)
+        btnLogin = view.findViewById(R.id.btn_login)
+        btnRegister = view.findViewById(R.id.btn_register)
         btnRegister.setOnClickListener(this)
     }
 
@@ -73,7 +89,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun setCallbackFragment(callBackFragment: CallBackFragment){
+    fun setCallbackFragment(callBackFragment: CallBackFragment) {
         this.callBackFragment = callBackFragment
     }
 }

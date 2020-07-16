@@ -1,12 +1,18 @@
 package com.ziesapp.volunteera.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.ziesapp.volunteera.MainActivity
 import com.ziesapp.volunteera.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +29,16 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private lateinit var etNama: EditText
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var etImage: EditText
+    private lateinit var etWebsite: EditText
+    private lateinit var btnRegister: Button
+    private lateinit var pbRegister: ProgressBar
+
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,11 +58,16 @@ class RegisterFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnRegister:Button = view.findViewById(R.id.btn_login)
-        val etUsername: EditText = view.findViewById(R.id.et_nama)
-        val etPassword:EditText = view.findViewById(R.id.et_password)
-        val etEmail:EditText = view.findViewById(R.id.et_email)
 
+        mAuth = FirebaseAuth.getInstance()
+
+        etNama = view.findViewById(R.id.et_nama)
+        etPassword = view.findViewById(R.id.et_password)
+        etEmail = view.findViewById(R.id.et_email)
+        etWebsite = view.findViewById(R.id.et_web)
+        etImage = view.findViewById(R.id.et_image_url)
+        pbRegister = view.findViewById(R.id.pb_register)
+        btnRegister = view.findViewById(R.id.btn_login)
         btnRegister.setOnClickListener(this)
 
     }
@@ -73,6 +94,35 @@ class RegisterFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        val email = etEmail.text.toString().trim()
+        val password = etPassword.text.toString().trim()
+
+        if (email.isEmpty()) {
+            etEmail.error = "Email perlu diisi"
+            return
+        }
+        if (password.isEmpty()) {
+            etPassword.error = "Password perlu diisi"
+            return
+        }
+        if (password.length < 8) {
+            etPassword.error = "Password membutuhkan setidaknya 8 karakter"
+            return
+        }
+        view?.visibility = View.VISIBLE
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+            if (!it.isSuccessful) {
+                Toast.makeText(activity, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
+                val mIntent = Intent(activity, MainActivity::class.java)
+                startActivity(mIntent)
+            } else {
+                Toast.makeText(activity, "Registrasi Gagal, Coba lagi", Toast.LENGTH_SHORT).show()
+            }
+        }
+            .addOnFailureListener {
+                Log.d("RegisterFragment", "Failed Login: ${it.message}")
+                Toast.makeText(activity, "Email/Password incorrect", Toast.LENGTH_SHORT).show()
+                pbRegister.visibility = View.INVISIBLE
+            }
     }
 }
