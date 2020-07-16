@@ -23,11 +23,12 @@ class ListActivityAdapter(private val listActivity: ArrayList<Activity>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_activity,parent,false)
+            .inflate(R.layout.list_activity, parent, false)
         return ListViewHolder(view)
     }
 
     override fun getItemCount(): Int = listActivity.size
 
-    override fun onBindViewHolder(holder: ListViewHolder, position: Int) = holder.bind(listActivity[position])
+    override fun onBindViewHolder(holder: ListViewHolder, position: Int) =
+        holder.bind(listActivity[position])
 }

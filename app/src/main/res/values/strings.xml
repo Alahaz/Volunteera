@@ -14,5 +14,25 @@
         <item>https://www.indorelawan.org/uploads/gallery/2020-3-8/5e8d5b25c59bccf3b14e3ca9_thumbnail370x250.png</item>
         <item>https://www.indorelawan.org/uploads/gallery/2019-8-10/5d77569782e94fa0e15b68b8_thumbnail370x250.jpg</item>
     </string-array>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="image">image for landing activity</string>
+    <string name="next">next</string>
+    <string name="nama">nama</string>
+    <string name="author">Alief Ahmad Azies</string>
+    <string name="email">e-mail</string>
+    <string name="password">password</string>
+    <string name="image_url">image URL</string>
+    <string name="official_website">official website</string>
+    <string name="username">username</string>
 </resources>
 
