@@ -14,6 +14,26 @@
         <item>https://www.indorelawan.org/uploads/gallery/2020-3-8/5e8d5b25c59bccf3b14e3ca9_thumbnail370x250.png</item>
         <item>https://www.indorelawan.org/uploads/gallery/2019-8-10/5d77569782e94fa0e15b68b8_thumbnail370x250.jpg</item>
     </string-array>
+
+    <string-array name="data_interest">
+        <item>@drawable/interest_art</item>
+        <item>@drawable/interest_education</item>
+        <item>@drawable/interest_help</item>
+        <item>@drawable/interest_human</item>
+        <item>@drawable/interest_parenting</item>
+        <item>@drawable/interest_teaching</item>
+        <item>@drawable/interest_technology</item>
+    </string-array>
+
+    <string-array name="judul_interest">
+        <item>Art</item>
+        <item>Education</item>
+        <item>Help</item>
+        <item>Human</item>
+        <item>Parenting</item>
+        <item>Teaching</item>
+        <item>Technology</item>
+    </string-array>
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -34,5 +54,7 @@
     <string name="image_url">image URL</string>
     <string name="official_website">official website</string>
     <string name="username">username</string>
+    <string name="find_activity">find activity</string>
+    <string name="search_activity">Search Activity</string>
 </resources>
 

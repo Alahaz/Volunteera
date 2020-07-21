@@ -1,6 +1,8 @@
 package com.ziesapp.volunteera.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.ziesapp.volunteera.MainActivity
 import com.ziesapp.volunteera.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,10 +32,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private lateinit var btnLogin: Button
     private lateinit var btnRegister: Button
-    private lateinit var etUsername: EditText
+    private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private lateinit var mAuth: FirebaseAuth
-    private lateinit var progressBar: ProgressBar
+    private lateinit var pbLogin: ProgressBar
 
     private lateinit var callBackFragment: CallBackFragment
 
@@ -74,18 +78,58 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        etUsername = view.findViewById(R.id.et_username)
+        etEmail = view.findViewById(R.id.et_email)
         etPassword = view.findViewById(R.id.et_password)
         mAuth = FirebaseAuth.getInstance()
-        progressBar = view.findViewById(R.id.pb_login)
+        pbLogin = view.findViewById(R.id.pb_login)
         btnLogin = view.findViewById(R.id.btn_login)
         btnRegister = view.findViewById(R.id.btn_register)
         btnRegister.setOnClickListener(this)
+        btnLogin.setOnClickListener(this)
+
+        if (mAuth.currentUser != null) {
+            startActivity(Intent(context, MainActivity::class.java))
+            activity?.finish()
+        }
     }
 
     override fun onClick(v: View) {
-        if (v.id == R.id.btn_register) {
-            callBackFragment.changeFragment()
+        when (v.id) {
+            R.id.btn_register -> callBackFragment.changeFragment()
+            R.id.btn_login -> {
+                val email = etEmail.text.toString().trim()
+                val password = etPassword.text.toString().trim()
+
+                if (email.isEmpty()) {
+                    etEmail.error = "Email required"
+                    return
+                }
+                if (password.isEmpty()) {
+                    etPassword.error = "Password required"
+                    return
+                }
+                if (password.length < 8) {
+                    etPassword.error = "Password at least needs 8 character"
+                    return
+                }
+                pbLogin.visibility = View.VISIBLE
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        Toast.makeText(
+                            activity,
+                            "Error! : " + (it.exception?.message),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        pbLogin.visibility = View.INVISIBLE
+                    } else {
+                        Toast.makeText(activity, "Succesfully Login", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(context, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+
+
         }
     }
 

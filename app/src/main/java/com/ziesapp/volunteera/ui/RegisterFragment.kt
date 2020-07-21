@@ -3,7 +3,6 @@ package com.ziesapp.volunteera.ui
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.ziesapp.volunteera.MainActivity
 import com.ziesapp.volunteera.R
@@ -70,6 +70,11 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         btnRegister = view.findViewById(R.id.btn_login)
         btnRegister.setOnClickListener(this)
 
+        if (mAuth.currentUser != null) {
+            startActivity(Intent(context, MainActivity::class.java))
+            activity?.finish()
+        }
+
     }
 
 
@@ -109,14 +114,14 @@ class RegisterFragment : Fragment(), View.OnClickListener {
             etPassword.error = "Password membutuhkan setidaknya 8 karakter"
             return
         }
-        view?.visibility = View.VISIBLE
+        pbRegister.visibility = View.VISIBLE
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
             if (!it.isSuccessful) {
-                Toast.makeText(activity, "Registrasi Berhasil", Toast.LENGTH_SHORT).show()
-                val mIntent = Intent(activity, MainActivity::class.java)
-                startActivity(mIntent)
+                return@addOnCompleteListener
             } else {
-                Toast.makeText(activity, "Registrasi Gagal, Coba lagi", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, "Succesfully Login", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
             }
         }
             .addOnFailureListener {

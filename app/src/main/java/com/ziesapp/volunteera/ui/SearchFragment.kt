@@ -1,11 +1,16 @@
 package com.ziesapp.volunteera.ui
 
+import android.content.res.TypedArray
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ziesapp.volunteera.Interest
 import com.ziesapp.volunteera.R
+import com.ziesapp.volunteera.adapter.GridInterestAdapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,7 +23,12 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
+
+    private val list = ArrayList<Interest>()
+
+    private lateinit var arrayNama: Array<String>
+    private lateinit var arrayFoto: TypedArray
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -35,7 +45,25 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_search, container, false)
+        val rvInterest = rootView.findViewById<RecyclerView>(R.id.rv_interest)
+        list.addAll(getGridActivity())
+        rvInterest.layoutManager = GridLayoutManager(activity, 2)
+        val gridInterestAdapter = GridInterestAdapter(list)
+        rvInterest.adapter = gridInterestAdapter
+
+        return rootView
+    }
+
+    private fun getGridActivity(): ArrayList<Interest> {
+        arrayNama = resources.getStringArray(R.array.judul_interest)
+        arrayFoto = resources.obtainTypedArray(R.array.data_interest)
+        val listInterest = ArrayList<Interest>()
+        for (position in arrayNama.indices) {
+            val interest = Interest(arrayNama[position], arrayFoto.getResourceId(position,-1))
+            listInterest.add(interest)
+        }
+        return listInterest
     }
 
     companion object {

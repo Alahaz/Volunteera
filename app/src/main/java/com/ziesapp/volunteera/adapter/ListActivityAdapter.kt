@@ -1,4 +1,4 @@
-package com.ziesapp.volunteera
+package com.ziesapp.volunteera.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.ziesapp.volunteera.Activity
+import com.ziesapp.volunteera.R
 import kotlinx.android.synthetic.main.list_activity.view.*
 
 class ListActivityAdapter(private val listActivity: ArrayList<Activity>) :

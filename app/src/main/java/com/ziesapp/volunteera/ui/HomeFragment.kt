@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ziesapp.volunteera.Activity
-import com.ziesapp.volunteera.ListActivityAdapter
+import com.ziesapp.volunteera.adapter.ListActivityAdapter
 import com.ziesapp.volunteera.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +46,8 @@ class HomeFragment : Fragment() {
         val rvHome = rootView.findViewById<RecyclerView>(R.id.rv_home)
         list.addAll(getListActivity())
         rvHome.layoutManager = LinearLayoutManager(activity)
-        val listActivityAdapter = ListActivityAdapter(list)
+        val listActivityAdapter =
+            ListActivityAdapter(list)
         rvHome.adapter = listActivityAdapter
 
         return rootView
