@@ -60,7 +60,7 @@ class SearchFragment : Fragment() {
         arrayFoto = resources.obtainTypedArray(R.array.data_interest)
         val listInterest = ArrayList<Interest>()
         for (position in arrayNama.indices) {
-            val interest = Interest(arrayNama[position], arrayFoto.getResourceId(position,-1))
+            val interest = Interest(arrayNama[position], arrayFoto.getResourceId(position, -1))
             listInterest.add(interest)
         }
         return listInterest

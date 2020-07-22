@@ -67,7 +67,7 @@ class RegisterFragment : Fragment(), View.OnClickListener {
         etWebsite = view.findViewById(R.id.et_web)
         etImage = view.findViewById(R.id.et_image_url)
         pbRegister = view.findViewById(R.id.pb_register)
-        btnRegister = view.findViewById(R.id.btn_login)
+        btnRegister = view.findViewById(R.id.btn_register)
         btnRegister.setOnClickListener(this)
 
         if (mAuth.currentUser != null) {
